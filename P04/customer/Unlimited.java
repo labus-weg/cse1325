@@ -14,7 +14,6 @@ import product.Media;
 
 public class Unlimited extends Account {
     public Unlimited() {
-        // Constructor can be empty if no additional initialization is needed
     }
 
     @Override

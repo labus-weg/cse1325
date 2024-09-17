@@ -11,7 +11,7 @@ package customer;
 import product.Media;
 
 public abstract class Account {
-    private static int accountCounter = 0;  // To generate unique account numbers
+    private static int accountCounter = 0; 
     private int accountNumber;
 
     public Account() {
@@ -22,6 +22,5 @@ public abstract class Account {
         return accountNumber;
     }
 
-    // Abstract method with no body
     public abstract String play(Media media);
 }
