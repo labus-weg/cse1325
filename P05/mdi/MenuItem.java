@@ -41,4 +41,3 @@ class MenuItem implements Runnable {
     private Object menuText;        // The text displayed to the user
     private Runnable menuResponse;  // run() is called on this object when selected
 }
-

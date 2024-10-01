@@ -47,4 +47,3 @@ class Menu {
         items.get(itemNumber).run();
     }
 }
-
