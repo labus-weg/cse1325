@@ -25,6 +25,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 // This class manages a single line of the menu with its associated method
+
+package mdi;
+
 class MenuItem implements Runnable {
     public MenuItem(Object menuText, Runnable menuResponse) {
         this.menuText = menuText;
