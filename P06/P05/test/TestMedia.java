@@ -1,5 +1,6 @@
-// Copyright 2024 by Professor George F. Rice, modifications copyright 2024 by [Nafisa Nawrin Labonno]
-// This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+package test;
+
+import product.Media;
 
 public class TestMedia {
     public static void main(String[] args) {
@@ -9,8 +10,9 @@ public class TestMedia {
         // Verify that media returns the correct string representation.
         String title = "The Little Shop of Horrors";
         String url = "https://publicdomainmovie.net/movie/the-little-shop-of-horrors-0";
-        Media media = new Media(title, url);
-        String expected = title + " (" + url + ")";
+        int points = 10;
+        Media media = new Media(title, url, points);
+        String expected = title + " (" + url + ", " + points + " points)";
         String actual = media.toString();
         if(!actual.equals(expected)) {
             System.err.println("FAIL: Expected media " + expected + '\n'
@@ -25,7 +27,7 @@ public class TestMedia {
         
         for(String goodURL : goodURLs) {
             try {
-                Media m = new Media("Title", goodURL);
+                Media m = new Media("Title", goodURL, points);
             } catch(Exception e) {
                 System.err.println("FAIL: Unexpected exception for URL " + goodURL);
                 System.err.println(e);
@@ -35,7 +37,7 @@ public class TestMedia {
         
         for(String badURL : badURLs) {
             try {
-                Media m = new Media("Title", badURL);
+                Media m = new Media("Title", badURL, points);
                 System.err.println("FAIL: Missing exception for URL " + badURL);
                 result |= vector;
             } catch(Exception e) {
@@ -48,3 +50,4 @@ public class TestMedia {
         System.exit(result);
     }
 }
+

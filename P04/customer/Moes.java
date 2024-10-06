@@ -1,19 +1,46 @@
 package customer;
 
+import product.Media;
+
 import java.util.ArrayList;
 
+/**
+ * Manages a collection of media and students, allowing for media management,
+ * student account operations, and media playback requests.
+ * 
+ * @author Nafisa Nawrin Labonno
+ * @version 1.0
+ * @since 2024
+ */
 public class Moes {
 
     private ArrayList<Media> library = new ArrayList<>();
     private ArrayList<Student> customers = new ArrayList<>();
 
+    /**
+     * Constructs a new Moes instance with empty media and student lists.
+     * 
+     * @since 2024
+     */
     public Moes() {
     }
 
+    /**
+     * Adds a media item to the media library.
+     * 
+     * @param media The media item to be added to the library.
+     * @since 2024
+     */
     public void addMedia(Media media) {
         library.add(media);
     }
 
+    /**
+     * Returns a string representation of all media items in the library.
+     * 
+     * @return A string listing all media items.
+     * @since 2024
+     */
     public String getMediaList() {
         StringBuilder mediaList = new StringBuilder();
         for (int i = 0; i < library.size(); i++) {
@@ -23,10 +50,22 @@ public class Moes {
         return mediaList.toString();
     }
 
+    /**
+     * Adds a student to the list of customers.
+     * 
+     * @param student The student to be added to the customer list.
+     * @since 2024
+     */
     public void addStudent(Student student) {
         customers.add(student);
     }
 
+    /**
+     * Returns a string representation of all students in the customer list.
+     * 
+     * @return A string listing all students.
+     * @since 2024
+     */
     public String getStudentList() {
         StringBuilder studentList = new StringBuilder();
         for (int i = 0; i < customers.size(); i++) {
@@ -36,6 +75,13 @@ public class Moes {
         return studentList.toString();
     }
 
+    /**
+     * Returns the number of points remaining for a specified student.
+     * 
+     * @param studentIndex The index of the student in the customer list.
+     * @return The number of points remaining for the student.
+     * @since 2024
+     */
     public int getPoints(int studentIndex) {
         Student student = customers.get(studentIndex);
         Account account = student.getAccount();
@@ -49,6 +95,14 @@ public class Moes {
         }
     }
 
+    /**
+     * Adds points to a specified student's account.
+     * 
+     * @param studentIndex The index of the student in the customer list.
+     * @param points The number of points to be added.
+     * @return A message indicating the new number of points or a notice for unlimited accounts.
+     * @since 2024
+     */
     public String buyPoints(int studentIndex, int points) {
         Student student = customers.get(studentIndex);
         Account account = student.getAccount();
@@ -64,6 +118,14 @@ public class Moes {
         }
     }
 
+    /**
+     * Requests a media item for a specified student.
+     * 
+     * @param studentIndex The index of the student in the customer list.
+     * @param mediaIndex The index of the media item in the library.
+     * @return A message indicating the result of the media request.
+     * @since 2024
+     */
     public String playMedia(int studentIndex, int mediaIndex) {
         Student student = customers.get(studentIndex);
         Media media = library.get(mediaIndex);

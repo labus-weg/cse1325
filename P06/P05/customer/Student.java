@@ -1,13 +1,14 @@
-// Copyright 2024 by Professor George F. Rice, modifications copyright 2024 by [Nafisa Nawrin Labonno]
-// This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+package customer;
+
+import product.Media;
 
 public class Student {
-    public Student(String name, int id, String email) {
+    public Student(String name, int id, String email, boolean unlimited) {
         if(email.endsWith("@uta.edu") || email.endsWith("@mavs.uta.edu")) {
             this.name = name;
             this.id = id;
             this.email = email;
-            this.account = new Account();
+            this.account = unlimited ? new Unlimited() : new Alacarte();
         } else {
             throw new IllegalArgumentException("Non-UTA email address: " + email);
         }
@@ -15,9 +16,12 @@ public class Student {
     public String requestMedia(Media media) {
         return account.play(media);
     }
+    public Account getAccount() {
+        return account;
+    }
     @Override
     public String toString() {
-        return name + " (" + id + ", " + email + ", Account #" + account.getAccountNumber();
+        return name + " (" + id + ", " + email + ", Account #" + account.getAccountNumber() + ')';
     }
     private String name;
     private int id;

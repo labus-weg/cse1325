@@ -1,7 +1,9 @@
-// Copyright 2024 by Professor George F. Rice, modifications copyright 2024 by [Nafisa Nawrin Labonno]
-// This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+package test;
 
-// BONUS SOLUTION
+import product.Media;
+
+import customer.Student;
+import customer.Account;
 
 public class TestStudent {
     public static void main(String[] args) {
@@ -10,7 +12,7 @@ public class TestStudent {
         
         // Verify that the Student's ``toString()`` method returns the correct representation 
         //   for a ``Student`` object.
-        Student s1 = new Student("Prof Rice", 1234567890, "george.rice@uta.edu");
+        Student s1 = new Student("Prof Rice", 1234567890, "george.rice@uta.edu", true);
         String actual = s1.toString();
         String expected = "Prof Rice (1234567890, george.rice@uta.edu, Account #1";
         if(!actual.equals(expected)) {
@@ -25,7 +27,7 @@ public class TestStudent {
         //   "Non-UTA email address: " and the email address.
         String badEmail = "george.rice@example.com";
         try {
-            Student s2 = new Student("Prof Rice", 1234567890, badEmail);
+            Student s2 = new Student("Prof Rice", 1234567890, badEmail, true);
             System.err.println("FAIL: Expected IllegalArgumentException for " + badEmail);
             System.err.println("      NO exception thrown");
             result |= vector;
@@ -46,8 +48,9 @@ public class TestStudent {
         // Verify that requesting media from Student returns "Playing " and the media
         String title = "The Little Shop of Horrors";
         String url = "https://publicdomainmovie.net/movie/the-little-shop-of-horrors-0";
-        Media media = new Media(title, url);
-        expected = "Playing " + title + " (" + url + ")";
+        int points = 5;
+        Media media = new Media(title, url, points);
+        expected = "Playing " + title + " (" + url + ", " + points + " points)";
         actual = s1.requestMedia(media);
         if(!actual.equals(expected)) {
             System.err.println("FAIL: Expected media request result \n" + expected + '\n'
