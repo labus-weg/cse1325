@@ -1,7 +1,10 @@
 package product;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 /**
- * Models a media product to serve to the students
+ * Models a media product to serve to the students.
  *
  * @author             Professor George F. Rice
  * @version            1.0
@@ -9,13 +12,13 @@ package product;
  * @license.agreement  Gnu General Public License 3.0
  */
 public class Media {
+    // Fields to hold media details
+    private String title;
+    private String url;
+    private int points;
+
     /**
      * Creates a Media instance.
-     *
-     * The Customer for whom this Order is placed is provide
-     * as the constructor parameter. The Order number is
-     * auto-generated as sequential integers. Items may be 
-     * added to the Order via the addItem(Item) method.
      *
      * @param title     the name by which the media is known
      * @param url       the Uniform Resource Locator of the media
@@ -26,41 +29,43 @@ public class Media {
         this.title = title;
         this.url = url;
         this.points = points;
-        // EXTREME BONUS SOLUTION
+        // EXTREME BONUS SOLUTION: Validate URL format
         try {
             new java.net.URI(url).toURL();
         } catch(Exception e) {
             throw new RuntimeException(url + " is invalid", e);
         }
-        // END EXTREME BONUS SOLUTION
     }
+
     /**
      * Returns the number of points required to access this media.
      *
-     * The value of points varies depending on the deal currently offered
-     * on the MOES website.
-     *
-     * @return        the cost in points 
-     * @since          1.0
+     * @return the cost in points 
      */
     public int getPoints() {
         return points;
     }
+
     /**
      * Returns an Order summary in receipt format.
      *
-     * This includes the Order number and Customer, a table
-     * of Items in the Order, and the total price of the Order.
-     * Sales tax is not included at this time.
-     *
-     * @return     the title with parenthetical url and points
-     * @since       1.0
+     * @return the title with parenthetical url and points
      */
     @Override
     public String toString() {
         return title + " (" + url + ", " + points + " points)";
     }
-    private String title;
-    private String url;
-    private int points;
+
+    /**
+     * Saves the media details to a file using BufferedWriter.
+     *
+     * @param bw the BufferedWriter used to write the data to a file
+     * @throws IOException if an I/O error occurs during writing
+     */
+    public void save(BufferedWriter bw) throws IOException {
+        // Write each field to the file
+        bw.write(title + '\n');        // Save title
+        bw.write(url + '\n');          // Save URL
+        bw.write(Integer.toString(points) + '\n'); // Save points as a string
+    }
 }
