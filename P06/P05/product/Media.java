@@ -18,15 +18,27 @@ public class Media {
      * @param title     the name by which the media is known
      * @param url       the Uniform Resource Locator of the media
      * @param points    the cost for accessing the media
-     * @throws IllegalArgumentException if the URL is invalid
+     * @throws IllegalArgumentException if the URL is invalid or points are negative
      * @since 1.0
      */
     public Media(String title, String url, int points) {
         this.title = title;
-        this.url = url;
+        validateUrl(url);
         this.points = points;
-        
-        // Validate URL format
+
+        // Validate points
+        if (points < 0) {
+            throw new IllegalArgumentException("Points cannot be negative.");
+        }
+    }
+
+    /**
+     * Validates the URL format.
+     *
+     * @param url the URL to validate
+     * @throws IllegalArgumentException if the URL is invalid
+     */
+    private void validateUrl(String url) {
         try {
             new java.net.URI(url).toURL();
         } catch (Exception e) {
