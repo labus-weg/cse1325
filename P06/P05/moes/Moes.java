@@ -1,81 +1,90 @@
 package moes;
 
-import product.Media;
 import customer.Student;
-import customer.Account;
-import customer.Alacarte;
-import customer.Unlimited;
+import product.Media;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Moes {
-    private ArrayList<Media> library = new ArrayList<>();
-    private ArrayList<Student> students = new ArrayList<>();
+    private List<Student> students;
+    private List<Media> mediaList;
+
+    public Moes() {
+        students = new ArrayList<>();
+        mediaList = new ArrayList<>();
+    }
+
+    public void addStudent(Student student) {
+        if (student != null) {
+            students.add(student);
+        } else {
+            throw new IllegalArgumentException("Cannot add null student.");
+        }
+    }
 
     public void addMedia(Media media) {
-        library.add(media);
+        if (media != null) {
+            mediaList.add(media);
+        } else {
+            throw new IllegalArgumentException("Cannot add null media.");
+        }
+    }
+
+    public int getPoints(int studentIndex) {
+        validateStudentIndex(studentIndex);
+        return students.get(studentIndex).getAccount().getPoints();
+    }
+
+    public String buyPoints(int studentIndex, int points) {
+        validateStudentIndex(studentIndex);
+        if (points <= 0) {
+            return "Points to buy must be positive.";
+        }
+        students.get(studentIndex).getAccount().addPoints(points);
+        return points + " points bought successfully.";
+    }
+
+    public String playMedia(int studentIndex, int mediaIndex) {
+        validateStudentIndex(studentIndex);
+        validateMediaIndex(mediaIndex);
+
+        Student student = students.get(studentIndex);
+        Media media = mediaList.get(mediaIndex);
+
+        if (student.getAccount().canAfford(media.getPointsRequired())) {
+            student.getAccount().subtractPoints(media.getPointsRequired());
+            return "Playing " + media.getTitle() + ": " + media.getUrl();
+        } else {
+            return "Not enough points to play this media.";
+        }
+    }
+
+    public String getStudentsList() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < students.size(); i++) {
+            sb.append(i).append(": ").append(students.get(i).getName()).append("\n");
+        }
+        return sb.toString();
     }
 
     public String getMediaList() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < library.size(); ++i)
-            sb.append("" + i + ") " + library.get(i) + '\n');
+        for (int i = 0; i < mediaList.size(); i++) {
+            sb.append(i).append(": ").append(mediaList.get(i).toString()).append("\n");
+        }
         return sb.toString();
     }
 
-    public void addStudent(Student student) {
-        students.add(student);
-    }
-
-    public String getStudentList() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < students.size(); ++i)
-            sb.append("" + i + ") " + students.get(i) + '\n');
-        return sb.toString();
-    }
-
-    public int getPoints(int studentIndex) {
-        Account account = students.get(studentIndex).getAccount();
-        if (account instanceof Alacarte) {
-            return ((Alacarte) account).getPointsRemaining();
-        } else if (account instanceof Unlimited) {
-            return Integer.MAX_VALUE;
-        } else {
-            throw new UnsupportedOperationException("Unknown subclass of Account");
-        }
-    }
-
-    public String buyPoints(int studentIndex, int points) {
-        Student student = students.get(studentIndex);
-        Account account = student.getAccount();
-        if (account instanceof Alacarte) {
-            Alacarte alacarte = (Alacarte) account;
-            alacarte.buyPoints(points);
-            return student.toString() + " now has "
-                    + alacarte.getPointsRemaining() + " points";
-        } else if (account instanceof Unlimited) {
-            return student.toString()
-                    + " has unlimited account and needs no points!";
-        } else {
-            throw new UnsupportedOperationException("Unknown subclass of Account");
-        }
-    }
-
-    public String playMedia(int studentIndex, int mediaIndex) {
-        Student student = students.get(studentIndex);
-        Media media = library.get(mediaIndex);
-        return student.requestMedia(media);
-    }
-
-    // New Methods
-    public Student getStudent(int index) {
+    private void validateStudentIndex(int index) {
         if (index < 0 || index >= students.size()) {
             throw new IndexOutOfBoundsException("Invalid student index: " + index);
         }
-        return students.get(index);
     }
 
-    public ArrayList<Student> getStudentsList() {
-        return new ArrayList<>(students); // or return getStudentList() for a formatted string
+    private void validateMediaIndex(int index) {
+        if (index < 0 || index >= mediaList.size()) {
+            throw new IndexOutOfBoundsException("Invalid media index: " + index);
+        }
     }
 }
