@@ -1,22 +1,30 @@
 package customer;
 
-import product.Media;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
-public class Alacarte extends Account { 
-    public void buyPoints(int points) {
-        pointsRemaining += points;
+public class Alacarte extends Account {
+    private String itemName;
+
+    public Alacarte() {
+        super();
+        this.itemName = "Default Item";
     }
-    public int getPointsRemaining() {
-        return pointsRemaining;
+
+    public Alacarte(BufferedReader br) throws IOException {
+        super(br);
+        this.itemName = br.readLine();
     }
+
     @Override
-    public String play(Media media) {
-        int points = media.getPoints();
-        if(points > pointsRemaining)
-            return "Buy more points: Requires " + points 
-                 + " points, you have " + pointsRemaining;
-        pointsRemaining -= points;
-        return "Playing " + media;
+    public void save(BufferedWriter bw) throws IOException {
+        super.save(bw);
+        bw.write(itemName + "\n");
     }
-    private int pointsRemaining = 0;
+
+    @Override
+    public String toString() {
+        return "Alacarte Account #" + getAccountNumber() + ", Item: " + itemName;
+    }
 }

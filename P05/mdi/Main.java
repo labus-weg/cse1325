@@ -1,146 +1,167 @@
 package mdi;
 
-import customer.Student;
-import product.Media;
 import moes.Moes;
-
+import product.Media;
+import customer.Student;
 import java.util.Scanner;
 
 public class Main {
     private Moes moes;
-    private Menu menu;
     private String output;
-    private boolean running;
+    private Menu menu;
+    private boolean running = true;
 
     public Main() {
-        moes = new Moes();
-        menu = new Menu();
+        this.moes = new Moes();
+        this.output = "";
+        this.menu = new Menu();
         initializeMenu();
-        output = "";
-        running = true;
     }
-
+// based on Professor's approach
     private void initializeMenu() {
-        menu.addMenuItem(new MenuItem("Add Student", this::addStudent));
-        menu.addMenuItem(new MenuItem("List Students", this::listStudents));
-        menu.addMenuItem(new MenuItem("Add Media", this::addMedia));
-        menu.addMenuItem(new MenuItem("List Media", this::listMedia));
-        menu.addMenuItem(new MenuItem("Play Media", this::playMedia));
-        menu.addMenuItem(new MenuItem("List Available Points", this::listAvailablePoints));
-        menu.addMenuItem(new MenuItem("Buy Points", this::buyPoints));
-        menu.addMenuItem(new MenuItem("Exit", this::endApp));
+        menu.addMenuItem(new MenuItem("Add Student", () -> addStudent()));
+        menu.addMenuItem(new MenuItem("List All Students", () -> listStudents()));
+        menu.addMenuItem(new MenuItem("Add Media", () -> addMedia()));
+        menu.addMenuItem(new MenuItem("List Media", () -> listMedia()));
+        menu.addMenuItem(new MenuItem("Play Media", () -> playMedia()));
+        menu.addMenuItem(new MenuItem("List Available Points", () -> listAvailablePoints()));
+        menu.addMenuItem(new MenuItem("Buy Points", () -> buyPoints()));
+        menu.addMenuItem(new MenuItem("Exit", () -> endApp()));
     }
 
+    // /////////////////////////////////////////////////////////////////////////
+    //                          M A I N   M E N U
+    
+    // Method mdi() runs the menu system
     public void mdi() {
-        Scanner scanner = new Scanner(System.in);
         while (running) {
-            System.out.println(output);
-            System.out.println("Main Menu:");
-            System.out.println(menu);
-            System.out.print("Select an option: ");
-            int command = getInt(scanner);
-            if (command >= 0 && command < menu.getItems().size()) {
-                menu.run(command);
-            } else {
-                output += "Invalid selection. Please try again.\n";
-            }
-            output = "";  // Clear output after displaying the menu
+            try {
+                Integer i = selectFromMenu();
+                if (i != null) menu.run(i);
+            } catch (Exception e) {
+                error("Invalid command", e);
+            } 
         }
-        scanner.close();
+    }
+
+    // Show the main menu and return the integer selected
+    private final String title = "\n".repeat(255) +
+    """
+                           \\\\\\///                          
+                          / _  _ \\                         
+                        (| (.)(.) |)                        
+     .----------------.OOOo--()--oOOO.---------------.
+     |                                               |
+     |    Mavs Online Entertainment System (MOES)    |
+     |    Version 0.3.0           ©2024 Prof Rice    |
+     |                                               |
+     '-----------------------------------------------'
+    """;
+    
+    private final String sep = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+
+    private Integer selectFromMenu() {
+        if (!output.isEmpty()) output = sep + output + sep;
+        System.out.println(title + menu + output);
+        output = "";
+        return Menu.getInt("Selection? ");
+    }
+
+    private void print(Object s) {
+        output += "\n" + s + "\n";
+    }
+
+    private void error(Object s, Exception e) {
+        output += "\n#### " + s + '\n';
+        if (e != null) {
+            output += "  => " + e + '\n';
+        }
+    }
+
+    // Menu actions
+
+    private void endApp() {
+        running = false;
+    }
+
+    private void playMedia() {
+        try {
+            print(moes.playMedia(inputStudentIndex(), inputMediaIndex()));
+        } catch (Exception e) {
+            error("Unable to play media", e);
+        }
+    }
+
+    private void listMedia() {
+        try {
+            print("Media Available via MOES\n========================");
+            print(moes.getMediaList());
+        } catch (Exception e) {
+            error("Unable to display media list", e);
+        }
+    }
+
+    private void listAvailablePoints() {
+        try {
+            int studentIndex = inputStudentIndex();
+            print(moes.getStudent(studentIndex) + " has " + moes.getPoints(studentIndex) + " points");
+        } catch (Exception e) {
+            error("Unable to look up point totals", e);
+        }
+    }
+
+    private void buyPoints() {
+        try {
+            int studentIndex = inputStudentIndex();
+            int currentPoints = moes.getPoints(studentIndex);
+            System.out.println(moes.getStudent(studentIndex) + " currently has " + currentPoints + " points");
+            int buyPoints = Menu.getInt("Number of additional points to buy? ");
+            if (buyPoints <= 0) {
+                error("Can only buy positive points", null);
+                return;
+            }
+            print(moes.buyPoints(studentIndex, buyPoints));
+            print(moes.getStudent(studentIndex) + " bought " + buyPoints + " points");
+        } catch (Exception e) {
+            error("Unable to buy points", e);
+        }
     }
 
     private void addStudent() {
-        String name = getString("Enter name: ");
-        int id = getInt("Enter ID: ");
-        String email = getString("Enter email: ");
-        boolean unlimited = getBoolean("Unlimited account? (true/false): ");
-        
         try {
-            Student student = new Student(name, id, email, unlimited);
-            moes.addStudent(student);
-            output += "Student added: " + student + "\n";
-        } catch (IllegalArgumentException e) {
-            output += "Error: " + e.getMessage() + "\n";
+            String name = Menu.getString("Student name? ", "");
+            Integer id = Menu.getInt("Student ID? ", "");
+            String email = Menu.getString("Student email? ", "");
+            Character account = Menu.getChar("(a)lacarte or (u)nlimited? ", "");
+
+            if (name != null && id != null && email != null && account != null) {
+                Student student = new Student(name, id, email, Character.toUpperCase(account) == 'U');
+                moes.addStudent(student);
+                print("Added student: " + student);
+            }
+        } catch (Exception e) {
+            error("Unable to add student", e);
         }
     }
 
     private void listStudents() {
-        output += "Student List:\n" + moes.getStudentList() + "\n";
-    }
-
-    private void addMedia() {
-        String title = getString("Enter media title: ");
-        String type = getString("Enter media type: ");
-        
-        Media media = new Media(title, type);
-        moes.addMedia(media);
-        output += "Media added: " + media + "\n";
-    }
-
-    private void listMedia() {
-        output += "Media List:\n" + moes.getMediaList() + "\n";
-    }
-
-    private void playMedia() {
-        int studentIndex = getInt("Enter student index: ");
-        int mediaIndex = getInt("Enter media index: ");
-        
-        String result = moes.playMedia(studentIndex, mediaIndex);
-        output += result + "\n";
-    }
-
-    private void listAvailablePoints() {
-        int studentIndex = getInt("Enter student index: ");
-        
-        int points = moes.getPoints(studentIndex);
-        output += "Student " + studentIndex + " has " + points + " points.\n";
-    }
-
-    private void buyPoints() {
-        int studentIndex = getInt("Enter student index: ");
-        int currentPoints = moes.getPoints(studentIndex);
-        
-        System.out.print("Current points: " + currentPoints + ". How many points to buy? ");
-        int pointsToBuy = getInt();
-        
-        if (pointsToBuy < 0) {
-            output += "Cannot buy negative points.\n";
-        } else {
-            String result = moes.buyPoints(studentIndex, pointsToBuy);
-            output += result + "\n";
+        try {
+            print("Students Registered with MOES\n===============================");
+            print(moes.getStudentsList());
+        } catch (Exception e) {
+            error("Unable to display student list", e);
         }
     }
 
-    private void endApp() {
-        running = false;
-        output += "Exiting the application. Goodbye!\n";
+    private void addMedia() {
+        // Implementation for adding media
     }
 
-    private String getString(String prompt) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(prompt);
-        return scanner.nextLine();
+    private int inputStudentIndex() {
+        // Implementation for getting student index
     }
 
-    private int getInt(String prompt) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(prompt);
-        return scanner.nextInt();
-    }
-
-    private int getInt() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
-    }
-
-    private boolean getBoolean(String prompt) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(prompt);
-        return scanner.nextBoolean();
-    }
-
-    public static void main(String[] args) {
-        Main mainApp = new Main();
-        mainApp.mdi();
+    private int inputMediaIndex() {
+        // Implementation for getting media index
     }
 }
