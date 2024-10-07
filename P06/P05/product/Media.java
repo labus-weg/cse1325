@@ -5,11 +5,6 @@ import java.io.IOException;
 
 /**
  * Models a media product to serve to the students.
- *
- * @author             Professor George F. Rice
- * @version            1.0
- * @since              1.0
- * @license.agreement  Gnu General Public License 3.0
  */
 public class Media {
     // Fields to hold media details
@@ -23,33 +18,53 @@ public class Media {
      * @param title     the name by which the media is known
      * @param url       the Uniform Resource Locator of the media
      * @param points    the cost for accessing the media
-     * @since           1.0
+     * @throws IllegalArgumentException if the URL is invalid
+     * @since 1.0
      */
     public Media(String title, String url, int points) {
         this.title = title;
         this.url = url;
         this.points = points;
-        // EXTREME BONUS SOLUTION: Validate URL format
+        
+        // Validate URL format
         try {
             new java.net.URI(url).toURL();
-        } catch(Exception e) {
-            throw new RuntimeException(url + " is invalid", e);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(url + " is invalid", e);
         }
     }
 
     /**
      * Returns the number of points required to access this media.
      *
-     * @return the cost in points 
+     * @return the cost in points
      */
     public int getPoints() {
         return points;
     }
 
     /**
+     * Returns the title of the media.
+     *
+     * @return the title of the media
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Returns the URL of the media.
+     *
+     * @return the URL of the media
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
      * Returns an Order summary in receipt format.
      *
-     * @return the title with parenthetical url and points
+     * @return the title with parenthetical URL and points
      */
     @Override
     public String toString() {
@@ -67,5 +82,32 @@ public class Media {
         bw.write(title + '\n');        // Save title
         bw.write(url + '\n');          // Save URL
         bw.write(Integer.toString(points) + '\n'); // Save points as a string
+    }
+
+    /**
+     * Checks if two Media objects are equal based on title, url, and points.
+     *
+     * @param obj the object to compare
+     * @return true if the objects are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Media)) return false;
+        Media other = (Media) obj;
+        return title.equals(other.title) && url.equals(other.url) && points == other.points;
+    }
+
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return a hash code value for this object
+     */
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + url.hashCode();
+        result = 31 * result + points;
+        return result;
     }
 }
