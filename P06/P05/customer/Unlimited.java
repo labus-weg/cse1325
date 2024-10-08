@@ -1,19 +1,22 @@
-package customer;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-
-public class Unlimited extends Account {
-    public Unlimited() {
-        super(); // Call the superclass constructor
-    }
-
-    public Unlimited(BufferedReader br) throws IOException {
-        super(br); // Call the superclass constructor
+public class UnlimitedAccount extends Account {
+    
+    public UnlimitedAccount(String accountHolder) {
+        super(accountHolder);
     }
 
     @Override
-    public String toString() {
-        return "Unlimited Account #" + getAccountNumber();
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println(amount + " deposited. New balance: " + balance);
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println(amount + " withdrawn. New balance: " + balance);
+        } else {
+            System.out.println("Insufficient funds. Current balance: " + balance);
+        }
     }
 }

@@ -42,4 +42,21 @@ public class Student {
         bw.write(account.getClass().getSimpleName() + "\n");
         account.save(bw);
     }
+
+    // Getter methods to access private fields while maintaining encapsulation
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getGradeLevel() {
+        return gradeLevel;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
 }
