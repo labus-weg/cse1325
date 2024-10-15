@@ -30,8 +30,11 @@ public class Boggle {
                 board = boards.get(i); // Protects against concurrent modification
             }
             
+            int someIntValue1 = 10;
+            int someIntValue2 = 20;
+
             Solver solver = new Solver(board, someIntValue1, someIntValue2);
-    
+
             for (String word : words) {
                 Solution solution = solver.solve(word); // Assuming you have a Solver class that handles this
                 if (solution != null) {
@@ -84,7 +87,7 @@ public class Boggle {
             }
                 
             // Read the list of words to find on the Boggle Boards
-            String s = null;
+            String s;
             try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
                 while ((s = br.readLine()) != null) words.add(s);
             } catch(IOException e) {
