@@ -24,7 +24,34 @@ public class Boggle {
     
     // =========== WRITE AND INVOKE THIS METHOD FOR EACH THREAD ===========
     private static void solveRange(int first, int lastPlusOne, int threadNumber) {
+        log("Thread " + threadNumber + " started processing boards " + first + " to " + (lastPlusOne - 1), 1);
+        
+        for (int i = first; i < lastPlusOne; i++) {
+            Board board;
+            
+            // Synchronize access to boards when retrieving a board
+            synchronized (boards) {
+                board = boards.get(i);
+            }
+            
+            Solver solver = new Solver(board, threadNumber, verbosity);
+            
+            for (String word : words) {
+                Solution solution = solver.solve(word);
+                if (solution != null) {
+                    // Synchronize access to solutions when adding a solution
+                    synchronized (solutions) {
+                        solutions.add(solution);
+                    }
+                    // Keeping a track of solutions using a simple log
+                    log("Thread " + threadNumber + " found solution: " + solution, 1);
+                }
+            }
+        }
+        
+        log("Thread " + threadNumber + " completed processing boards " + first + " to " + (lastPlusOne - 1), 1);
     }
+    
     // =========== END THREAD METHOD ===========
 
 
