@@ -102,7 +102,6 @@ public class BoggleGUI {
         }
 
         executor.shutdown();
-
         while (!executor.isTerminated()) {
         }
 
