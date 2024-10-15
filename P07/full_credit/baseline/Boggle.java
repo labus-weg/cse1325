@@ -1,14 +1,11 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.List;
 import java.util.ArrayList;
-
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.HashSet;
-
 import java.util.Objects;
 
 public class Boggle {
@@ -20,40 +17,35 @@ public class Boggle {
     private static int boardSize = 50;     // default is to use 50x50 Boggle boards
     private static int numThreads = 1;     // default is to use a single thread
     private static String filename = "words.txt"; // default (this is the supplied file of 971 common words)
-    private static int verbosity = 0;   // smaller ints mean less output - us 0 for timing
-    
-    // =========== WRITE AND INVOKE THIS METHOD FOR EACH THREAD ===========
-    private static void solveRange(int first, int lastPlusOne, int threadNumber) {
-        log("Thread " + threadNumber + " started processing boards " + first + " to " + (lastPlusOne - 1), 1);
-        
+    private static int verbosity = 0;   // smaller ints mean less output - use 0 for timing
+
+    // =========== WRITE AND INVOKE THIS METHOD FOR EACH THREAD =========== 
+    public void solveRange(int first, int lastPlusOne, int threadNum) {
+        log("Thread " + threadNum + " starting to solve boards from " + first + " to " + (lastPlusOne - 1), 1);
+
+        // Iterate over the range of boards to be solved by this thread
         for (int i = first; i < lastPlusOne; i++) {
-            Board board;
-            
-            // Synchronize access to boards when retrieving a board
+            BoggleBoard board;
             synchronized (boards) {
-                board = boards.get(i);
+                board = boards.get(i); // Protects against concurrent modification
             }
-            
-            Solver solver = new Solver(board, threadNumber, verbosity);
-            
+
+            Solver solver = new Solver(board);
+
             for (String word : words) {
-                Solution solution = solver.solve(word);
+                BoggleSolution solution = solver.solve(word);
                 if (solution != null) {
-                    // Synchronize access to solutions when adding a solution
                     synchronized (solutions) {
-                        solutions.add(solution);
+                        solutions.add(solution); // Protect the shared list from concurrent access
                     }
-                    // Keeping a track of solutions using a simple log
-                    log("Thread " + threadNumber + " found solution: " + solution, 1);
                 }
+                // If solution is null, just ignore it and continue
             }
         }
-        
-        log("Thread " + threadNumber + " completed processing boards " + first + " to " + (lastPlusOne - 1), 1);
+        log("Thread " + threadNum + " finished solving boards.", 1);
     }
-    
-    // =========== END THREAD METHOD ===========
 
+    // =========== END THREAD METHOD =========== 
 
     public static void main(String[] args) {
         try {
@@ -67,7 +59,7 @@ public class Boggle {
                            verbosity 0 = # solutions, 1 = threads, 2 = boards & solutions, 3 = details""");
                 System.exit(0);
             }
-        
+
             // Parse the other command line arguments
             try {
                 if(args.length > 0 && !args[0].equals("-")) numberOfBoards = Integer.parseInt(args[0]);
@@ -75,11 +67,11 @@ public class Boggle {
                 if(args.length > 2 && !args[2].equals("-")) numThreads = Integer.parseInt(args[2]);
                 if(args.length > 3 && !args[3].equals("-")) filename = args[3];
                 if(args.length > 4 && !args[4].equals("-")) verbosity = Integer.parseInt(args[4]);
-           } catch(Exception e) {
-                    System.err.println("Invalid command line arguments: " + e);
-                    System.exit(-2);
+            } catch(Exception e) {
+                System.err.println("Invalid command line arguments: " + e);
+                System.exit(-2);
             }
-    
+
             // Generate random Boggle boards on which to search
             try {
                 for(int i=0; i<numberOfBoards; ++i) {
@@ -87,11 +79,10 @@ public class Boggle {
                     log("\nBoard " + i + "\n\n" + boards.get(i) + "\n\n", 2);
                 }
             } catch(Exception e) {
-                    System.err.println("Unable to generate new Boggle boards: " + e);
-                    System.exit(-2);
+                System.err.println("Unable to generate new Boggle boards: " + e);
+                System.exit(-2);
             }
-            // System.exit(0);
-        
+
             // Read the list of words to find on the Boggle Boards
             String s = null;
             try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
@@ -100,21 +91,28 @@ public class Boggle {
                 System.err.println("Unable to read words from file " + filename + ": " + e);
                 System.exit(-1);
             }
-            
-            // =========== CHANGE THIS BLOCK OF CODE TO ADD THREADING ===========
-            // Find words on the Boggle boards, collecting the solutions in a TreeSet
-            int threadNumber = 0; // This will be set to a unique int for each of your threads
-            for(Board board : boards) {
-                Solver solver = new Solver(board, threadNumber, verbosity);
-                for(String word : words) {
-                    Solution solution = solver.solve(word);
-                    if(solution != null) solutions.add(solution);
-                }
+
+            // Create an array to hold the thread references
+            Thread[] threads = new Thread[numThreads];
+
+            // Calculate the range of boards for each thread
+            for (int t = 0; t < numThreads; t++) {
+                final int first = (int) (t * (numberOfBoards / (double) numThreads));
+                final int lastPlusOne = (t == numThreads - 1) ? numberOfBoards : (int) ((t + 1) * (numberOfBoards / (double) numThreads));
+                final int threadNum = t; // Store thread number for logging
+
+                // Create and start the thread
+                threads[t] = new Thread(() -> solveRange(first, lastPlusOne, threadNum));
+                threads[t].start();
             }
-            // =========== END BLOCK OF CODE TO ADD THREADING ===========
+
+            // Wait for all threads to finish
+            for (Thread thread : threads) {
+                thread.join();
+            }
 
             // Print all the solutions if requested
-            for(Solution solution : solutions) {
+            for (Solution solution : solutions) {
                 log(solution.toString(), 2);
             }
 
@@ -127,10 +125,9 @@ public class Boggle {
             System.exit(-99);
         }
     }
+
     // This implements the verbosity from Boggle, printing the debug message only if requested
     private static void log(String s, int level) {
         if(verbosity == level) System.out.println(s);
     }
-    
-
 }
