@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BoggleGUI {
     private JFrame frame;
@@ -16,6 +19,7 @@ public class BoggleGUI {
 
     private List<Board> boards = new ArrayList<>();
     private Set<Solution> solutions = new TreeSet<>();
+    private AtomicInteger currentBoardIndex = new AtomicInteger(0);
 
     public BoggleGUI() {
         frame = new JFrame("Boggle Solver");
@@ -52,19 +56,18 @@ public class BoggleGUI {
     }
 
     private void solveBoggle() {
-        resultsOutput.setText(""); // Clear previous results
-        solutions.clear(); // Clear previous solutions
-        boards.clear(); // Clear previous boards
+        resultsOutput.setText("");
+        solutions.clear();
+        boards.clear();
 
         String boardText = boardInput.getText();
         String[] boardLines = boardText.split("\n");
 
-        // Create the board from input
         for (String line : boardLines) {
-            boards.add(new Board(line.trim())); // Assume Board constructor takes a string
+            String[] rowArray = line.trim().split(" ");
+            boards.add(new Board(rowArray));
         }
 
-        // Load words from input
         List<String> words = new ArrayList<>();
         String wordsText = wordsInput.getText();
         String[] wordsLines = wordsText.split("\n");
@@ -72,23 +75,40 @@ public class BoggleGUI {
             words.add(word.trim());
         }
 
-        // Solve the boards
-        for (Board board : boards) {
-            Solver solver = new Solver(board, 30, 60);
-            for (String word : words) {
-                Solution solution = solver.solve(word);
-                if (solution != null) {
-                    solutions.add(solution);
+        int numberOfThreads = 4;
+        ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
+
+        for (int i = 0; i < numberOfThreads; i++) {
+            executor.submit(() -> {
+                while (true) {
+                    int boardIndex = currentBoardIndex.getAndIncrement();
+                    if (boardIndex >= boards.size()) {
+                        break;
+                    }
+
+                    Board board = boards.get(boardIndex);
+                    Solver solver = new Solver(board, 30, 60);
+
+                    for (String word : words) {
+                        Solution solution = solver.solve(word);
+                        if (solution != null) {
+                            synchronized (solutions) {
+                                solutions.add(solution);
+                            }
+                        }
+                    }
                 }
-            }
+            });
         }
 
-        // Display results
-        StringBuilder results = new StringBuilder();
-        for (Solution solution : solutions) {
-            results.append(solution.toString()).append("\n");
+        executor.shutdown();
+
+        while (!executor.isTerminated()) {
         }
-        resultsOutput.setText(results.toString());
+
+        for (Solution solution : solutions) {
+            resultsOutput.append(solution.toString() + "\n");
+        }
         resultsOutput.append("\nFound " + solutions.size() + " solutions\n");
     }
 
