@@ -24,8 +24,6 @@ for (int i = 1; i < argc; ++i) {
         for (const auto& word : *words) {
             std::cout << word << std::endl;
         }
-
-        delete words;
-
+        
         return 0;
 }
