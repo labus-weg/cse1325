@@ -1,0 +1,337 @@
+[33mcommit 9c7c7ad2dd653ca7a0902a4c13bb81dd06d8a2f8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 28 04:56:48 2024 +0000
+
+    Updated Xtreme Bonus, tested & fixed bugs
+
+[33mcommit ca758c79388225bb7e394cd97ced54f191c3e9e6[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 28 04:53:13 2024 +0000
+
+    Added a Makefile for Bonus
+
+[33mcommit 86e977f92d000532008d694b92bda76879aaf8d4[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 28 04:34:47 2024 +0000
+
+    Update 2
+
+[33mcommit e85a8b88bb65efa550c2d9a9a3718b3a218e9a40[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 28 04:10:24 2024 +0000
+
+    Updated Bonus HW, fixed bugs
+
+[33mcommit 53706dca4357ce77ac3f11c044e65c76c5ba47bb[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Sun Oct 27 13:59:45 2024 +0000
+
+    Added all 4 files
+
+[33mcommit 1a3e3961173513c7211f21a5254d0a180e75a0eb[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Sun Oct 27 09:15:28 2024 +0000
+
+    Created P08, wrote program, added 1st screenshot
+
+[33mcommit 48f380b546824aaa6b3a8f59622d2cdfc3fae214[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 12:46:48 2024 +0000
+
+    algorithm modified  for xtreme bonus
+
+[33mcommit f293268f0d7a5e7947fe28ace220b87d78afe55f[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 12:45:23 2024 +0000
+
+    attempted bonus. fixed errors
+
+[33mcommit 4ad329bdc43252e5096a21b891871f3a9456074b[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 12:42:55 2024 +0000
+
+    attempted bonus
+
+[33mcommit bb3a979b6977fadfd561cf65729ec50d17ae1b6d[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 11:59:25 2024 +0000
+
+    fixed more bugs
+
+[33mcommit ac1fdac195f21a1953c20d0ab2316886efb160f0[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 11:56:22 2024 +0000
+
+    main class modified, errors debugged
+
+[33mcommit f26c7f907e67672a649159eb39cea531b4d48dae[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 11:52:00 2024 +0000
+
+    modified the boggle class
+
+[33mcommit b1008863ac0972fe4086c05b5c6214851f2b6933[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 11:34:35 2024 +0000
+
+    solveRange implemented
+
+[33mcommit 53d663099cb8fcd2d1f40528d001fb5ade1287d4[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 01:35:32 2024 +0000
+
+    baseline runs successfully
+
+[33mcommit 49ebc941673df608f14541fa7780a9937e5f7a36[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 15 01:23:27 2024 +0000
+
+    baseline runs successfully
+
+[33mcommit d9f04bcf31569082c20e668c1ed0815e2ca5d76d[m[33m ([m[1;32md07067b3e76dd88bc53d396765620c290241850d[m[33m)[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 8 12:44:33 2024 +0000
+
+    Tried fixing all  classes
+
+[33mcommit eee49f455710b723bda01065c7fb6434f46443b9[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 7 15:38:32 2024 +0000
+
+    Extreme bonus attempted
+
+[33mcommit c5f230e71ca7d1d39a85342300fe9d64acf59ab6[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 7 15:23:06 2024 +0000
+
+    Main class updated along with everything in customer directory
+
+[33mcommit 8c20450890d32a73a544916b7cc9c28fb48b3332[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 7 15:04:37 2024 +0000
+
+    Updated test classes
+
+[33mcommit 5150b075f266cd6fc15ca72ad1670d8fdfe3aebe[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 7 14:31:21 2024 +0000
+
+    Account class updated
+
+[33mcommit 610088929e67e6e73ac0f11e57988d6251d8d28d[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Oct 7 05:10:58 2024 +0000
+
+    Media class updated
+
+[33mcommit 57819411a8cbb619b7ffe76078422ceadd1b5474[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Sun Oct 6 06:35:30 2024 +0000
+
+    Updated save Media Class
+
+[33mcommit d07067b3e76dd88bc53d396765620c290241850d[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Sun Oct 6 06:20:01 2024 +0000
+
+    Step 1 of P06
+
+[33mcommit 69ddf864c083c827632c627b9e164eb8a5e50450[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 1 12:48:17 2024 +0000
+
+    Updated Menu class (2)
+
+[33mcommit 06ab7a88cc8c0ac005518c55423c2e4a53313c4a[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 1 12:30:13 2024 +0000
+
+    Updated Menu
+
+[33mcommit b89b0d95c181cc11a60215e9d5c875a7e1812d82[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 1 06:56:50 2024 +0000
+
+    Updated Main class
+
+[33mcommit 1ab1eb5fcb066613bc28c8a824d0c1d9d69d10c5[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Oct 1 00:01:46 2024 +0000
+
+    Added Main in mdi
+
+[33mcommit 0b8251c7be5b3c3b35b21d3d603b806a9eac4015[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Sep 30 20:56:13 2024 +0000
+
+    P05 updated
+
+[33mcommit 587cf72df9c1fbe7e366095893d75ad7143e9d08[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Mon Sep 30 03:15:00 2024 +0000
+
+    Created P05
+
+[33mcommit dd6b5f464ec9d0be9ce6c03346685dfa73bef9b7[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 17 08:26:44 2024 +0000
+
+    Ran Test Files
+
+[33mcommit 0929bd580102720056be44d8bac6bb736b99bde6[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 17 08:17:22 2024 +0000
+
+    CheckP04.java added
+
+[33mcommit fff2816a715b13c5da47a3a7b7a691ab936ff772[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 17 07:53:50 2024 +0000
+
+    Created JavaDoc for Media
+
+[33mcommit 1341be3ea9557d7b953d5ba491bc05e7336efbae[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 17 07:12:53 2024 +0000
+
+    Implement play method in Alacarte class and handle points
+
+[33mcommit 4e4e18d43ce29d14583ce1b235927dc6d47741dd[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 17 07:12:21 2024 +0000
+
+    Implement play method in Unlimited class
+
+[33mcommit 9057da2f469a9b8ef1ef8d6f2a54fd0a64b7b50b[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 17 07:12:10 2024 +0000
+
+    Made Account abstract and defined play as an abstract method
+
+[33mcommit 4237c135dd2a4a9df4a7620e15d3d1c279697d80[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 17 05:06:36 2024 +0000
+
+    Add complete directory structure & necessary files
+
+[33mcommit b5c8c364f76723df6b48aeccfe6720563dbefb2a[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 10 07:22:41 2024 +0000
+
+    Added Student class and TestStudent regression test
+
+[33mcommit 469e44707fecd1587e81010c57fa15ee064e80b6[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 10 07:14:57 2024 +0000
+
+    Added Account class and TestAccount regression test
+
+[33mcommit 8f2f9797c8e4134a4f50cc0c89ebd69f6b070f5a[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 10 07:13:42 2024 +0000
+
+    Initial commit with Media class and TestMedia regression test
+
+[33mcommit c0c9c3f6ba17241539bab18ab47dab83ea7727ee[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 10 05:08:13 2024 +0000
+
+    Environment created
+
+[33mcommit 09bfa999b9d64ee59d80df42396a9358ae00389f[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 08:58:22 2024 +0000
+
+    Updated Purse class in Extreme Bonus
+
+[33mcommit c44a2a11b14fa66ff7eeceaf90e3b993ba3ff065[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 08:55:57 2024 +0000
+
+    Add getWeight method to Coin class based on year and denomination
+
+[33mcommit bc456330a1ac35aa7ebc57930c913c4fd3ed5e21[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 08:49:58 2024 +0000
+
+    Updated Purse class to calculate and display total weight
+
+[33mcommit 42115cdf40932383d7dd4c38d72e7f77dd8a1f01[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 08:45:38 2024 +0000
+
+    Impletemented bonus
+
+[33mcommit 02984b426a3d6ba4f0ae83baca47f9a7aae89073[m
+Merge: 72f0b67 1521565
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 08:15:08 2024 +0000
+
+    Updated Coin.java and fixed issues
+
+[33mcommit 72f0b67c97a88cbd33e053f22c861004237a8312[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 08:04:55 2024 +0000
+
+    Added full_credit implementation: Denomination, Coin, and Purse classes
+
+[33mcommit 15215653778b6249e6a339474f316e963f9e6d12[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 07:54:45 2024 +0000
+
+    Add new image and update README; keep existing files
+
+[33mcommit 5710dd00b1920c7c25b6f7216dafe3b012f5dafa[m
+Merge: 971df13 a5c2960
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 07:48:08 2024 +0000
+
+    Merge branch 'main' of https://github.com/labus-weg/cse1325
+
+[33mcommit 971df13f3d9fe8bd7edaeff7b7ebf63001fe7801[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 07:44:01 2024 +0000
+
+    Created Denomination enum with values for the given coins
+
+[33mcommit 87b87e4f826451ea93e51acf933d3d44e95fc5ae[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 07:26:53 2024 +0000
+
+    Bonus directory has build.xml file now
+
+[33mcommit f7ae2b5378def56b9cd6980f0dae347dc4b7ff6f[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 07:26:24 2024 +0000
+
+    Bonus directory has build.xml file now
+
+[33mcommit a5c29606b3439f4c3d06aa0fa76f5c18d1a8078f[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Sep 3 07:10:07 2024 +0000
+
+    Added build.xml file to full_credit
+
+[33mcommit 1688a9df0dd70ca6bd5762462446bb79b364e9eb[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Thu Aug 29 18:37:56 2024 +0000
+
+    P01 bonus
+
+[33mcommit 6c9f3d870b2ee78d985a910e23ae692a8eb64f73[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Thu Aug 29 18:24:49 2024 +0000
+
+    P01 full credit
+
+[33mcommit f7eae083ce57dd1e95ca67b0efc2f3e41d31d69c[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Tue Aug 27 07:40:11 2024 -0500
+
+    Add files via upload
+
+[33mcommit a691ab177610cb4e3a6b00cf3b5e937846343f56[m
+Author: labus-weg <117149420+labus-weg@users.noreply.github.com>
+Date:   Thu Aug 22 09:17:19 2024 -0500
+
+    Initial commit
