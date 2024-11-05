@@ -16,16 +16,19 @@ int main(int argc, char* argv[]) {
         // Loop
         std::string user_input;
         while (true) {
-            clock.print(); // Print the current time
+            timer.print(); // Print the current time
             std::cout << "Press enter to increment time OR type 'q' to quit: ";
             std::getline(std::cin, user_input);
             if (user_input == "q") break;
 
-            clock.tic();
+            timer.tic();
         }
     } catch (const std::out_of_range& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return EXIT_FAILURE;
+    } catch (const std::runtime_error& e) {
+        std::cerr << "Timer expired: " << e.what() << std::endl;
+        return EXIT_SUCCESS;
     } catch (const std::exception& e) {
         std::cerr << "An unexpected error occurred: " << e.what() << std::endl;
         return EXIT_FAILURE;
