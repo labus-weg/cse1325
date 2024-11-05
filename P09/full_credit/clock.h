@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <iomanip>
 
 class Clock {
 protected:
@@ -13,7 +12,7 @@ protected:
 
 public:
     Clock(int hours, int minutes, int seconds);
-    virtual ~Clock() = default;
+    virtual ~Clock();
     void print() const;
     void tic();
 };
