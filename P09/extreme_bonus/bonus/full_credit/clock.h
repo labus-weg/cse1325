@@ -2,19 +2,20 @@
 #define CLOCK_H
 
 #include <iostream>
+#include <iomanip>
 #include <stdexcept>
 
 class Clock {
-protected:
-    int _hours;
-    int _minutes;
-    int _seconds;
-
 public:
     Clock(int hours, int minutes, int seconds);
     virtual ~Clock();
     void print() const;
     void tic();
+
+protected:
+    int _hours;
+    int _minutes;
+    int _seconds;
 };
 
 #endif
