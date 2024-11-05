@@ -1,4 +1,8 @@
-#include "clock.h"
+#include "timer.h"
+#include <iostream>
+#include <stdexcept>
+
+
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
