@@ -10,7 +10,7 @@ public:
 
     virtual ~Timer() {}
 
-    void tic() override;
+    void tic();
 };
 
 #endif
