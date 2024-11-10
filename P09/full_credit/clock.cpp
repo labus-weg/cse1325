@@ -19,9 +19,9 @@ Clock::~Clock() {}
 
 // Print method
 void Clock::print() const {
-    std::cout << (_hours < 10 ? "0" : "") << _hours << ":"
-              << (_minutes < 10 ? "0" : "") << _minutes << ":"
-              << (_seconds < 10 ? "0" : "") << _seconds << std::endl;
+    std::cout << std::setfill('0') << std::setw(2) << _hours << ":"
+              << std::setfill('0') << std::setw(2) << _minutes << ":"
+              << std::setfill('0') << std::setw(2) << _seconds << std::endl;
 }
 
 // Increment method

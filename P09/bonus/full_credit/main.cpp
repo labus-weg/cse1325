@@ -2,8 +2,6 @@
 #include <iostream>
 #include <stdexcept>
 
-
-
 int main(int argc, char* argv[]) {
     if (argc != 4) {
         std::cerr << "usage: clock <hour> <minutes> <seconds>" << std::endl;
@@ -11,16 +9,15 @@ int main(int argc, char* argv[]) {
     }
 
     try {
-
-        int hours = std::stoi(argv[1]); //this converts cmd line arg to int since they're always entered as strings
+        int hours = std::stoi(argv[1]);
         int minutes = std::stoi(argv[2]);
         int seconds = std::stoi(argv[3]);
 
-        Timer timer(hours, minutes, seconds); //Timer instance is created
+        Timer timer(hours, minutes, seconds); 
         // Loop
         std::string user_input;
         while (true) {
-            timer.print(); // Print the current time
+            timer.print();
             std::cout << "Press enter to increment time OR type 'q' to quit: ";
             std::getline(std::cin, user_input);
             if (user_input == "q") break;
@@ -32,7 +29,7 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     } catch (const std::runtime_error& e) {
         std::cerr << "Timer expired: " << e.what() << std::endl;
-        return EXIT_SUCCESS;
+        return EXIT_SUCCESS; 
     } catch (const std::exception& e) {
         std::cerr << "An unexpected error occurred: " << e.what() << std::endl;
         return EXIT_FAILURE;
