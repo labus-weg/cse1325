@@ -23,4 +23,5 @@ private:
     int _pence;
 
     void rationalize();
+    void ensureNonNegative();  // Ensures no negative values for pounds, shillings, or pence
 };

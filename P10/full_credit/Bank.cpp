@@ -15,11 +15,17 @@ int main() {
         int pounds, shillings, pence;
 
         std::cout << "Name account " << i << ": ";
-        std::cin.ignore();
+        std::cin.ignore();  // To clear the input buffer before using getline
         std::getline(std::cin, accountName);
 
         std::cout << "Enter your initial deposit (pounds shillings pence): ";
         std::cin >> pounds >> shillings >> pence;
+
+        // Check for valid deposit amounts
+        if (pounds < 0 || shillings < 0 || pence < 0) {
+            std::cerr << "Error: Deposit amounts cannot be negative. Account creation failed.\n";
+            continue;  // Skip creating this account
+        }
 
         vault[accountName] = Purse(pounds, shillings, pence);
         std::cout << "Account " << accountName << " created with " << vault[accountName] << "\n";
