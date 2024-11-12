@@ -1,5 +1,5 @@
-CXX = g++
-CXXFLAGS += -std=c++2a -Wall -g
+ CXX = g++
+ CXXFLAGS += -std=c++2a -Wall -g
 
  bank: bank.o purse.o *.h
 	$(CXX) $(CXXFLAGS) bank.o purse.o  -o bank
@@ -16,13 +16,19 @@ CXXFLAGS += -std=c++2a -Wall -g
  test_full_credit.o: test_full_credit.cpp *.h
 	$(CXX) $(CXXFLAGS) -c test_full_credit.cpp -o test_full_credit.o
 
- test_bonus: test_bonus.o purse.o *.h
-	$(CXX) $(CXXFLAGS) test_bonus.o purse.o  -o test_bonus
+ test_extreme_bonus_pound: test_extreme_bonus_pound.o purse.o *.h
+	$(CXX) $(CXXFLAGS) test_extreme_bonus_pound.o purse.o  -o test_extreme_bonus_pound
 
- test_bonus.o: test_bonus.cpp *.h
-	$(CXX) $(CXXFLAGS) -c test_bonus.cpp -o test_bonus.o
+ test_extreme_bonus_pound.o: test_extreme_bonus_pound.cpp *.h
+	$(CXX) $(CXXFLAGS) -c test_extreme_bonus_pound.cpp -o test_extreme_bonus_pound.o
 
- all: bank test_full_credit test_bonus
- 
+ test_extreme_bonus_subscripts: test_extreme_bonus_subscripts.o purse.o *.h
+	$(CXX) $(CXXFLAGS) test_extreme_bonus_subscripts.o purse.o  -o test_extreme_bonus_subscripts
+
+ test_extreme_bonus_subscripts.o: test_extreme_bonus_subscripts.cpp *.h
+	$(CXX) $(CXXFLAGS) -c test_extreme_bonus_subscripts.cpp -o test_extreme_bonus_subscripts.o
+
+ all: bank test_full_credit test_extreme_bonus_pound test_extreme_bonus_subscripts
+
  clean:
-	-rm -f *.o *.gch *~ a.out bank test_full_credit test_bonus
+	-rm -f *.o *.gch *~ a.out bank test_full_credit test_extreme_bonus_pound test_extreme_bonus_subscripts

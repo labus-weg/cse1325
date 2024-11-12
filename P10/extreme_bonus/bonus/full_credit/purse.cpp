@@ -1,7 +1,8 @@
 #include "purse.h"
 #include <iostream>
+#include <stdexcept> // This library handles exceptions/invalid subscript inputs
 
-Purse::Purse(int pounds, int shillings, int pence)
+Purse::Purse(int pounds, int shillings, int pence) 
     : _pounds(pounds), _shillings(shillings), _pence(pence) {
     rationalize();
 }
@@ -34,19 +35,37 @@ Purse Purse::operator-(const Purse& other) const {
     return Purse(_pounds - other._pounds, _shillings - other._shillings, _pence - other._pence);
 }
 
-void Purse::rationalize() {
+int& Purse::operator[](const std::string& subscript) {
+    if (subscript == "£") {
+        return _pounds;
+    } else if (subscript == "s") {
+        return _shillings;
+    } else if (subscript == "d") {
+        return _pence;
+    } else if (subscript == "#") {
+        return _pounds; 
+    } else {
+        throw std::invalid_argument("FAIL: Invalid subscript value\n");
+    }
+}
 
-    _shillings += _pence / 12;
+void Purse::rationalize() {
+    _shillings += _pence / 12; 
     _pence %= 12;
-    _pounds += _shillings / 20;
+    _pounds += _shillings / 20; 
     _shillings %= 20;
 
     if (_pence < 0) {
         _shillings -= (-_pence + 11) / 12;
         _pence = 12 - (-_pence % 12);
     }
+
     if (_shillings < 0) {
         _pounds -= (-_shillings + 19) / 20;
         _shillings = 20 - (-_shillings % 20);
+    }
+
+        if (_pounds > 100) {
+        std::cout << "Wow! You rich! ;-) ;-) Just kidding. Please run me again!! \n";
     }
 }
