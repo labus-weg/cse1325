@@ -5,17 +5,16 @@
 
 class Purse {
 private:
-    int _pence;
-    int _shillings;
-    int _pounds;
+    int _pence, _shillings, _pounds;
 
     void rationalize();
 
 public:
-    Purse(int pence = 0, int shillings = 0, int pounds = 0);
-
+    Purse(int pounds = 0, int shillings = 0, int pence = 0);
+    
     friend std::ostream& operator<<(std::ostream& ost, const Purse& purse);
-
+    
+    // Comparison operators (manual implementation)
     bool operator==(const Purse& other) const;
     bool operator!=(const Purse& other) const;
     bool operator<(const Purse& other) const;
@@ -23,12 +22,10 @@ public:
     bool operator>(const Purse& other) const;
     bool operator>=(const Purse& other) const;
 
-    Purse& operator++();
+    Purse& operator++();  
     Purse operator++(int);
-
     Purse operator+(const Purse& other) const;
     Purse operator-(const Purse& other) const;
-
     Purse& operator+=(const Purse& other);
     Purse& operator-=(const Purse& other);
 };

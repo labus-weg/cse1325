@@ -4,34 +4,41 @@
 #include "purse.h"
 
 int main() {
-    std::map<std::string, Purse> vault;
+    std::cout << "Welcome to Ye Olde Bank of Merry England\n\n";
 
     int numAccounts;
-    std::cout << "How many accounts do you want to create? ";
+    std::cout << "How many accounts? ";
     std::cin >> numAccounts;
     std::cin.ignore();
 
+    std::map<std::string, Purse> vault;
+
     for (int i = 0; i < numAccounts; ++i) {
         std::string accountName;
-        int pence, shillings, pounds;
-
-        std::cout << "Enter account name: ";
+        std::cout << "Name account " << i + 1 << ": ";
         std::getline(std::cin, accountName);
 
-        std::cout << "Enter the initial deposit (pence, shillings, pounds): ";
-        std::cin >> pence >> shillings >> pounds;
+        int pounds, shillings, pence;
+        std::cout << "Enter your initial deposit (pounds shillings pence): ";
+        std::cin >> pounds >> shillings >> pence;
         std::cin.ignore();
 
-        vault[accountName] = Purse(pence, shillings, pounds);
+        Purse newAccount(pounds, shillings, pence);
+        vault[accountName] = newAccount;
+
+        std::cout << "Account " << accountName << " created with " << newAccount << std::endl;
     }
+
+    std::cout << "\nAccount List\n";
+    std::cout << "============\n\n";
 
     Purse total;
     for (const auto& entry : vault) {
-        std::cout << entry.first << ": " << entry.second << std::endl;
+        std::cout << "             " << entry.first << " with " << entry.second << std::endl;
         total += entry.second;
     }
 
-    std::cout << "Total amount in the bank: " << total << std::endl;
+    std::cout << "\nTotal in bank is " << total << std::endl;
 
     return 0;
 }
