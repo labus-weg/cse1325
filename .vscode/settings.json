@@ -46,7 +46,19 @@
         "typeinfo": "cpp",
         "ctime": "cpp",
         "iomanip": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "condition_variable": "cpp",
+        "cstring": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "ratio": "cpp",
+        "regex": "cpp",
+        "shared_mutex": "cpp",
+        "thread": "cpp",
+        "cinttypes": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
