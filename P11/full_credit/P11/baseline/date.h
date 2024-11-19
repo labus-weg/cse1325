@@ -7,6 +7,8 @@ class Date {
 private:
     int _year, _month, _day;
 
+    bool validate(int year, int month, int day) const;
+
 public:
     Date(int year = 1970, int month = 1, int day = 1);
 
@@ -38,6 +40,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& ost, const Date& date);
     friend std::istream& operator>>(std::istream& ist, Date& date);
+
+    bool isValid() const;
+
 
 };
 
