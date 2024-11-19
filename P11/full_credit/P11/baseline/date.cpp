@@ -12,3 +12,15 @@ std::ostream& operator<<(std::ostream& ost, const Date& date) {
     ost.fill(old_setfill);
     return ost;
 }
+
+std::istream& operator>>(std::istream& ist, Date& date) {
+    int year, month, day;
+    char delimiter;
+    ist >> year >> delimiter >> month >> delimiter >> day;
+    if (ist) {
+        date = Date(year, month, day);
+    }
+    return ist;
+}
+
+
